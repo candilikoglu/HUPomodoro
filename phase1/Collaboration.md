@@ -1,5 +1,5 @@
 # Colloboration
-
+Co-signed: CD, ML, EH, CP, CY
 ### Description of our brainstorming meetings: 
 
 * September 26th, 2021 - Science and Technology Building computer lab at 2pm
