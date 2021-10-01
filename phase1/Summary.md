@@ -1,5 +1,5 @@
 # Summary.md
-
+Co-signed: CD, ML, EH, CP, CY
 ### Goal: Describe your project 
 #### 1. What are you planning to build?
 We are creating a study tool that uses the Pomodoro Method to help students stay on task and work effectively. The extension will allow the user to add a task, then start studying for a specific time frame with breaks also for a specific time window. During this period, if the user is working in marked “productive” sites the timer will continue for the study period. If the user is on other sites during the study period they will have an alert on screen and the timer will pause.
