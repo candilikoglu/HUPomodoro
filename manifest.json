@@ -1,0 +1,25 @@
+{
+
+    "manifest_version": 2,
+    "name": "Borderify",
+    "version": "1.0",
+  
+    "description": "Adds a timer to all webpages for students to track stduying time",
+  
+    "icons": {
+      "48": "icons/border-48.png"
+    },
+
+    "browser_action": {
+        "default_title": "HU Pomodoro",
+        "default_popup": "popup/popup.html"
+      },
+  
+    "content_scripts": [
+      {
+        "matches": ["*://*.mozilla.org/*"],
+        "js": ["borderify.js"]
+      }
+    ]
+  
+  }
