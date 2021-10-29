@@ -4,13 +4,19 @@
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-
-<h2>Browser Time</h2>
-
-<form>
-  <label for="time"> 1 min to 60 :</label>
-    <input type = "number" id="time" name="time" min="1" max="60">
-    <input type = "submit" value = "Enter">
-</form>
+    <div>
+    <form>
+        <div>
+           <span>Screen Time</span>:<span id="minute"> 00</span>:<span id="second">00</span>
+           <input type="number" id="timeInput" value=""></input>
+        </div>
+            <div class="button-container">
+                <button type="button" class="start" value="Start">Start</button>
+                <button type="button" class="stop" value="Stop">Stop</button>
+                <button type="button" class="reset" value="Reset">Reset</button>
+            </div>
+        </form>
+    </div>
+    <script src="timer.js"></script>
 </body>
 </html>
