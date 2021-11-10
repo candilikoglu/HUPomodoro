@@ -17,32 +17,7 @@ let second = parseInt(secondContainer.innerText);
 let inputTime = document.getElementById('timeInput');
 inputTime.addEventListener('change', updateInterval);
 
-function updateInterval(e) {
-    minuteContainer.innerHTML = e.target.value;
-    minute = parseInt(minuteContainer.innerText);
-}
-
-function startTimer() {
-    stopTimer();
-    timerInterval = setInterval(() => {timer(); }, 1000);
-
-    toogleVisibility(inputTime, false);
-    
-}
-
-function stopTimer() {
-    clearInterval(timerInterval);
-}
-
-function resetTimer() {
-    minute = inputTime.value;
-    second = 0;
-    document.getElementById('minute').innerText = inputTime.value;
-    document.getElementById('second').innerText = '00';
-    clearInterval(timerInterval);
-
-    toogleVisibility(inputTime, true);
-}
+initialize();
 
 function timer() {
     if (minute <= 0 && second <= 0) {
@@ -53,13 +28,38 @@ function timer() {
     } else {
         second --;
     }
+    let time = `${returnData(minute)}:${returnData(second)}`;
+    storeTimer("time", time);
+    updateDisplay(time);    
+}
 
-    document.getElementById('minute').innerText = returnData(minute);
-    document.getElementById('second').innerText = returnData(second);
+function updateInterval(e) {
+    let time  = `${returnData(e.target.value)}:${returnData(0)}`;
+    storeTimer("time", time);
+    updateDisplay(time);
+}
+
+function startTimer() {
+    stopTimer();
+    timerInterval = setInterval(() => {timer(); }, 1000);
+    toogleVisibility(inputTime, false);
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+}
+
+function resetTimer() {
+    minute = 0;
+    second = 0;
+    document.getElementById('minute').innerText =  returnData(minute);
+    document.getElementById('second').innerText =  returnData(second);
+    clearInterval(timerInterval);
+    toogleVisibility(inputTime, true);
 }
 
 function returnData(data) {
-    return data > 10 ? data : `0${data}`;
+    return data >= 10 ? data : `0${data}`;
 }
 
 function toogleVisibility(element, resetTimer)  {
@@ -68,4 +68,34 @@ function toogleVisibility(element, resetTimer)  {
     } else if(!resetTimer){
         element.style.display = "none";
     }  
+}
+
+// intializing the timer 
+function initialize() {
+    var gettingStoredValue = browser.storage.local.get(null);
+    gettingStoredValue.then((results) => {
+    var key = Object.keys(results);
+    var storedTime = results[key];
+    updateDisplay(storedTime);
+    }, onError);
+}
+
+function updateDisplay(storedTime) {
+    let minuteAndSecond = storedTime.split(":");
+    
+    minuteContainer.innerText = minuteAndSecond[0];
+    secondContainer.innerText = minuteAndSecond[1];
+
+    minute = parseInt(minuteAndSecond[0]);
+    second = parseInt(minuteAndSecond[1]);
+}
+
+function storeTimer(title, value) {
+    browser.storage.local.clear();
+    var storingTime = browser.storage.local.set({title : value});
+}
+
+/* generic error handler */
+function onError(error) {
+    console.log(error);
 }
