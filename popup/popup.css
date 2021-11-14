@@ -20,7 +20,7 @@ button {
 	border: 20px gradient;
 	border-radius: 25px;
 	margin: 10px 0px 10px 0px;
-	padding: 5px 25px 5px 25px;
+	padding: 5px 20px 5px 20px;
 	font-family: 'Montserrat';
   	font-size: 16px;
  	font-weight: bold;
@@ -29,9 +29,13 @@ button {
 }
 
 .start {
-	border-color: #186429;
+	border-color: #07F025;
 }
 
-.stop,.reset {
-	border-color: #911B22;
+.reset {
+	border-color: #F11B2B;
+}
+
+.pause {
+	border-color: #FF9800;
 }
