@@ -91,7 +91,7 @@ function updateDisplay(storedTime) {
 }
 
 function storeTimer(title, value) {
-    browser.storage.local.clear();
+    //browser.storage.local.clear();
     var storingTime = browser.storage.local.set({title : value});
 }
 
