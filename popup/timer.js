@@ -22,15 +22,18 @@ initialize();
 function timer() {
     if (minute <= 0 && second <= 0) {
         stopTimer();
+        display();
+
     } else if (second == 0) {
         minute --;
         second = 59;
     } else {
         second --;
     }
+
     let time = `${returnData(minute)}:${returnData(second)}`;
     storeTimer("time", time);
-    updateDisplay(time);    
+    updateDisplay(time);
 }
 
 function updateInterval(e) {
@@ -48,7 +51,13 @@ function startTimer() {
 function stopTimer() {
     clearInterval(timerInterval);
 }
+//Alerts user that time is up and plays sound
+function display(){
+  const soun = document.getElementById("sound");
+  soun.play();
+  alert('Times UP');
 
+}
 function resetTimer() {
     minute = 0;
     second = 0;
@@ -67,27 +76,30 @@ function toogleVisibility(element, resetTimer)  {
         element.style.display = "block";
     } else if(!resetTimer){
         element.style.display = "none";
-    }  
+    }
 }
 
-// intializing the timer 
+// intializing the timer
 function initialize() {
     var gettingStoredValue = browser.storage.local.get(null);
     gettingStoredValue.then((results) => {
     var key = Object.keys(results);
     var storedTime = results[key];
     updateDisplay(storedTime);
+
     }, onError);
 }
 
 function updateDisplay(storedTime) {
     let minuteAndSecond = storedTime.split(":");
-    
+
     minuteContainer.innerText = minuteAndSecond[0];
     secondContainer.innerText = minuteAndSecond[1];
 
     minute = parseInt(minuteAndSecond[0]);
     second = parseInt(minuteAndSecond[1]);
+
+
 }
 
 function storeTimer(title, value) {
