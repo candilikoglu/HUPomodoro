@@ -11,27 +11,11 @@ let timerInterval;
 let minuteContainer = document.getElementById('minute');
 let secondContainer = document.getElementById('second');
 
-let minute = parseInt(minuteContainer.innerText);
-let second = parseInt(secondContainer.innerText);
+var minute = parseInt(minuteContainer.innerText);
+var second = parseInt(secondContainer.innerText);
 
 let inputTime = document.getElementById('timeInput');
 inputTime.addEventListener('change', updateInterval);
-
-initialize();
-
-function timer() {
-    if (minute <= 0 && second <= 0) {
-        stopTimer();
-    } else if (second == 0) {
-        minute --;
-        second = 59;
-    } else {
-        second --;
-    }
-    let time = `${returnData(minute)}:${returnData(second)}`;
-    storeTimer("time", time);
-    updateDisplay(time);    
-}
 
 function updateInterval(e) {
     let time  = `${returnData(e.target.value)}:${returnData(0)}`;
@@ -40,13 +24,13 @@ function updateInterval(e) {
 }
 
 function startTimer() {
-    stopTimer();
     timerInterval = setInterval(() => {timer(); }, 1000);
     toogleVisibility(inputTime, false);
 }
 
 function stopTimer() {
     clearInterval(timerInterval);
+    localStorage.removeItem('dateInMS');
 }
 
 function resetTimer() {
@@ -56,6 +40,23 @@ function resetTimer() {
     document.getElementById('second').innerText =  returnData(second);
     clearInterval(timerInterval);
     toogleVisibility(inputTime, true);
+    localStorage.removeItem('dateInMS');
+}
+
+function timer() {
+    if (minute <= 0 && second <= 0) {
+        resetTimer();
+    } else if (second == 0) {
+        minute --;
+        second = 59;
+    } else {
+        second --;
+    }
+    let time = `${returnData(minute)}:${returnData(second)}`;
+    storeTimer("time", time);
+    updateDisplay(time);  
+
+    localStorage.setItem("dateInMS", Date.now());
 }
 
 function returnData(data) {
@@ -77,8 +78,23 @@ function initialize() {
     var key = Object.keys(results);
     var storedTime = results[key];
     updateDisplay(storedTime);
-    }, onError);
+    if (localStorage.getItem("dateInMS") != null) {
+        var oldTime = localStorage.getItem("dateInMS");
+        getNewTime(oldTime);
+    }
+    }, onError);   
 }
+
+function getNewTime(oldTime) {
+    let timePassed = Math.floor((Date.now() - oldTime) / 1000);
+    let secondPassed = timePassed % 60;
+    second = second - secondPassed;
+    second = second > 0 ? second : 59 + second;
+    secondContainer.innerText = returnData(second);
+
+    startTimer();
+}
+
 
 function updateDisplay(storedTime) {
     let minuteAndSecond = storedTime.split(":");
@@ -99,3 +115,7 @@ function storeTimer(title, value) {
 function onError(error) {
     console.log(error);
 }
+
+window.onload = (event) => {
+    initialize();
+  };
