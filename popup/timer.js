@@ -59,10 +59,10 @@ function display(){
 
 }
 function resetTimer() {
-    minute = 0;
-    second = 0;
-    document.getElementById('minute').innerText =  returnData(minute);
-    document.getElementById('second').innerText =  returnData(second);
+    minute =0;
+    second =0;
+    document.getElementById('minute').innerText = returnData(minute);
+    document.getElementById('second').innerText = returnData(second);
     clearInterval(timerInterval);
     toogleVisibility(inputTime, true);
 }
@@ -73,7 +73,7 @@ function returnData(data) {
 
 function toogleVisibility(element, resetTimer)  {
     if (element.style.display === "none" && resetTimer) {
-        element.style.display = "block";
+        element.style.display = "inline";
     } else if(!resetTimer){
         element.style.display = "none";
     }
