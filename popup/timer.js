@@ -1,5 +1,5 @@
 let startButton = document.querySelector('.start');
-let stopButton = document.querySelector('.stop');
+let stopButton = document.querySelector('.pause');
 let resetButton = document.querySelector('.reset');
 
 startButton.addEventListener('click', startTimer);
