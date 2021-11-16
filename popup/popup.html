@@ -4,17 +4,22 @@
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <meta content="utf-8" http-equiv="encoding">
   <link rel="stylesheet" href="popup.css">
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Major Mono Display' rel='stylesheet'>
 </head>
 <body>
+  <audio id = "sound">
+      <source src = "twinkle.mp3" />
+  </audio>
     <div>
     <form>
         <div>
-           <span>Screen Time</span>:<span id="minute"> 00</span>:<span id="second">00</span>
+           <span id="minute"> 00</span>:<span id="second">00</span>
            <input type="number" id="timeInput" value="" min="1"></input>
         </div>
             <div class="button-container">
                 <button type="button" class="start" value="Start">Start</button>
-                <button type="button" class="stop" value="Stop">Stop</button>
+                <button type="button" class="pause" value="Pause">Pause</button>
                 <button type="button" class="reset" value="Reset">Reset</button>
             </div>
         </form>
