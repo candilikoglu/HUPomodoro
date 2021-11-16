@@ -1,5 +1,5 @@
 let startButton = document.querySelector('.start');
-let stopButton = document.querySelector('.stop');
+let stopButton = document.querySelector('.pause');
 let resetButton = document.querySelector('.reset');
 
 startButton.addEventListener('click', startTimer);
@@ -17,6 +17,24 @@ var second = parseInt(secondContainer.innerText);
 let inputTime = document.getElementById('timeInput');
 inputTime.addEventListener('change', updateInterval);
 
+
+function timer() {
+    if (minute <= 0 && second <= 0) {
+        stopTimer();
+        display();
+
+    } else if (second == 0) {
+        minute --;
+        second = 59;
+    } else {
+        second --;
+    }
+
+    let time = `${returnData(minute)}:${returnData(second)}`;
+    storeTimer("time", time);
+    updateDisplay(time);
+}
+
 function updateInterval(e) {
     let time  = `${returnData(e.target.value)}:${returnData(0)}`;
     storeTimer("time", time);
@@ -32,12 +50,18 @@ function stopTimer() {
     clearInterval(timerInterval);
     localStorage.removeItem('dateInMS');
 }
+//Alerts user that time is up and plays sound
+function display(){
+  const soun = document.getElementById("sound");
+  soun.play();
+  alert('Times UP');
 
+}
 function resetTimer() {
-    minute = 0;
-    second = 0;
-    document.getElementById('minute').innerText =  returnData(minute);
-    document.getElementById('second').innerText =  returnData(second);
+    minute =0;
+    second =0;
+    document.getElementById('minute').innerText = returnData(minute);
+    document.getElementById('second').innerText = returnData(second);
     clearInterval(timerInterval);
     toogleVisibility(inputTime, true);
     localStorage.removeItem('dateInMS');
@@ -71,7 +95,7 @@ function toogleVisibility(element, resetTimer)  {
     }
 }
 
-// intializing the timer 
+// intializing the timer
 function initialize() {
     var gettingStoredValue = browser.storage.local.get(null);
     gettingStoredValue.then((results) => {
@@ -98,16 +122,18 @@ function getNewTime(oldTime) {
 
 function updateDisplay(storedTime) {
     let minuteAndSecond = storedTime.split(":");
-    
+
     minuteContainer.innerText = minuteAndSecond[0];
     secondContainer.innerText = minuteAndSecond[1];
 
     minute = parseInt(minuteAndSecond[0]);
     second = parseInt(minuteAndSecond[1]);
+
+
 }
 
 function storeTimer(title, value) {
-    browser.storage.local.clear();
+    //browser.storage.local.clear();
     var storingTime = browser.storage.local.set({title : value});
 }
 
@@ -116,6 +142,8 @@ function onError(error) {
     console.log(error);
 }
 
+
 window.onload = (event) => {
     initialize();
   };
+

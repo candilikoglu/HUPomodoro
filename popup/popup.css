@@ -1,6 +1,11 @@
 body{
-  background-color: #00ddff;
-  width: 300px;
+  background-color: #333333;
+  font-family: 'Major Mono Display';
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  width: 350px;
 }
 h2{
   color: rgba(66, 65, 77, 1); 
@@ -8,4 +13,29 @@ h2{
 
 p {
   font-size: 16px;
+}
+
+button {
+	background-color: #333333;
+	border: 20px gradient;
+	border-radius: 25px;
+	margin: 10px 0px 10px 0px;
+	padding: 5px 20px 5px 20px;
+	font-family: 'Montserrat';
+  	font-size: 16px;
+ 	font-weight: bold;
+	color: white;
+  	text-transform: uppercase;
+}
+
+.start {
+	border-color: #07F025;
+}
+
+.reset {
+	border-color: #F11B2B;
+}
+
+.pause {
+	border-color: #FF9800;
 }
