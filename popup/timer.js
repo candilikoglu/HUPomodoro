@@ -65,10 +65,10 @@ function returnData(data) {
 
 function toogleVisibility(element, resetTimer)  {
     if (element.style.display === "none" && resetTimer) {
-        element.style.display = "block";
+        element.style.display = "inline";
     } else if(!resetTimer){
         element.style.display = "none";
-    }  
+    }
 }
 
 // intializing the timer 
