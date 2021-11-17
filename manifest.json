@@ -18,7 +18,7 @@
     "browser_action": {
         "default_title": "HU Pomodoro",
         "default_popup": "popup/popup.html",
-        "default_icon" : "clock.png"
+        "default_icon" : "StudyTool (1).png"
       },
     
 	"content_scripts": [
