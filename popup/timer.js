@@ -17,24 +17,6 @@ var second = parseInt(secondContainer.innerText);
 let inputTime = document.getElementById('timeInput');
 inputTime.addEventListener('change', updateInterval);
 
-
-function timer() {
-    if (minute <= 0 && second <= 0) {
-        stopTimer();
-        display();
-
-    } else if (second == 0) {
-        minute --;
-        second = 59;
-    } else {
-        second --;
-    }
-
-    let time = `${returnData(minute)}:${returnData(second)}`;
-    storeTimer("time", time);
-    updateDisplay(time);
-}
-
 function updateInterval(e) {
     let time  = `${returnData(e.target.value)}:${returnData(0)}`;
     storeTimer("time", time);
@@ -70,6 +52,7 @@ function resetTimer() {
 function timer() {
     if (minute <= 0 && second <= 0) {
         resetTimer();
+        display();
     } else if (second == 0) {
         minute --;
         second = 59;
